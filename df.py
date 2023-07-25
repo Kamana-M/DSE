@@ -19,9 +19,8 @@ else:
 	usecols='A:J',
 	nrows=631,
 )	
-
+	
 st.sidebar.header("Filtrer ici:")
-
 
 annees=st.sidebar.multiselect(
 	"Selectionner une région",
