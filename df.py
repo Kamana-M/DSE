@@ -67,6 +67,16 @@ genre=st.sidebar.multiselect(
 #Filtrer les données
 if not annees and not Régions and not Zones and not SS and not OD and not SOD and not classe and not filtre1 and not genre:
 	df_selection = df
+#Filtre Unique
+elif not annees and not Zones and not SS and not OD and not SOD and not classe and not filtre1 and not genre:
+	df_selection = df.query("(REGIONS==@Régions)")
+elif not annees and not Régions and not SS and not OD and not SOD and not classe and not filtre1 and not genre:
+	df_selection = df.query("(ZONES==@Zones)")
+elif not annees and not Régions and not Zones and not OD and not SOD and not classe and not filtre1 and not genre:
+	df_selection = df.query("(SOUS_SYSTEME==@SS)")
+elif not annees and not Régions and not Zones and not SS and not SOD and not classe and not filtre1 and not genre:
+	df_selection = df.query("(ORDRE_ENSEIGENEMENT==@OD)")
+#Filtre total
 elif not Régions and not Zones and not SS and not OD and not SOD and not classe and not filtre1 and not genre:
 	df_selection = df.query("(ANNEE_SCOLAIRE==@annees)")
 elif not Zones and not SS and not OD and not SOD and not classe and not filtre1 and not genre:
@@ -83,6 +93,8 @@ elif not filtre1 and not genre:
 	df_selection = df.query("(ANNEE_SCOLAIRE==@annees) and (REGIONS==@Régions) and (ZONES==@Zones and (SOUS_SYSTEME==@SS) and (ORDRE_ENSEIGENEMENT==@OD) and (SOUS_ORDRE_ENSEIGENEMENT==@SOD) and (CLASSE==@classe))")
 elif not genre:
 	df_selection = df.query("(ANNEE_SCOLAIRE==@annees) and (REGIONS==@Régions) and (ZONES==@Zones and (SOUS_SYSTEME==@SS) and (ORDRE_ENSEIGENEMENT==@OD) and (SOUS_ORDRE_ENSEIGENEMENT==@SOD) and (CLASSE==@classe) and (FILTRE_1==@filtre1))")
+elif annees and  Régions and  Zones and  SS and  OD and  SOD and  classe and  filtre1 and  genre:
+	df_selection = df.query("(ANNEE_SCOLAIRE==@annees) and (REGIONS==@Régions) and (ZONES==@Zones and (SOUS_SYSTEME==@SS) and (ORDRE_ENSEIGENEMENT==@OD) and (SOUS_ORDRE_ENSEIGENEMENT==@SOD) and (CLASSE==@classe) and (FILTRE_1==@filtre1) and (CRITERES_1==@genre))")
 
 
 st.dataframe(df_selection)
