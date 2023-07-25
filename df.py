@@ -71,6 +71,19 @@ elif not Régions and not Zones and not SS and not OD and not SOD and not classe
 	df_selection = df.query("(ANNEE_SCOLAIRE==@annees)")
 elif not Zones and not SS and not OD and not SOD and not classe and not filtre1 and not genre:
 	df_selection = df.query("(ANNEE_SCOLAIRE==@annees) and (REGIONS==@Régions)")
+elif not SS and not OD and not SOD and not classe and not filtre1 and not genre:
+	df_selection = df.query("(ANNEE_SCOLAIRE==@annees) and (REGIONS==@Régions) and (ZONES==@Zones)")
+elif not OD and not SOD and not classe and not filtre1 and not genre:
+	df_selection = df.query("(ANNEE_SCOLAIRE==@annees) and (REGIONS==@Régions) and (ZONES==@Zones and (SOUS_SYSTEME==@SS))")
+elif not SOD and not classe and not filtre1 and not genre:
+	df_selection = df.query("(ANNEE_SCOLAIRE==@annees) and (REGIONS==@Régions) and (ZONES==@Zones and (SOUS_SYSTEME==@SS) and (ORDRE_ENSEIGENEMENT==@OD))")	
+elif not classe and not filtre1 and not genre:
+	df_selection = df.query("(ANNEE_SCOLAIRE==@annees) and (REGIONS==@Régions) and (ZONES==@Zones and (SOUS_SYSTEME==@SS) and (ORDRE_ENSEIGENEMENT==@OD) and (SOUS_ORDRE_ENSEIGENEMENT==@SOD))")	
+elif not filtre1 and not genre:
+	df_selection = df.query("(ANNEE_SCOLAIRE==@annees) and (REGIONS==@Régions) and (ZONES==@Zones and (SOUS_SYSTEME==@SS) and (ORDRE_ENSEIGENEMENT==@OD) and (SOUS_ORDRE_ENSEIGENEMENT==@SOD) and (CLASSE==@classe))")
+elif not genre:
+	df_selection = df.query("(ANNEE_SCOLAIRE==@annees) and (REGIONS==@Régions) and (ZONES==@Zones and (SOUS_SYSTEME==@SS) and (ORDRE_ENSEIGENEMENT==@OD) and (SOUS_ORDRE_ENSEIGENEMENT==@SOD) and (CLASSE==@classe) and (FILTRE_1==@filtre1))")
+
 
 st.dataframe(df_selection)
 
