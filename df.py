@@ -67,9 +67,13 @@ genre=st.sidebar.multiselect(
 	options=df["CRITERES_1"].unique()
 	)
 
-df_selection = df.query(
-	"(ANNEE_SCOLAIRE==@annees) or (REGIONS==@Régions) or (ZONES==@Zones) or (SOUS_SYSTEME==@SS) or (ORDRE_ENSEIGENEMENT==@OD) or (SOUS_ORDRE_ENSEIGENEMENT==@SOD) or (CLASSE==@classe) or (FILTRE_1==@filtre1) or (CRITERES_1==@genre)"
-)
+#Filtrer les données
+if not annees and not Régions and not Zones and not SS and not OD and not SOD and not classe and not filtre1 and not genre:
+	df_selection = df
+elif not Régions and not Zones and not SS and not OD and not SOD and not classe and not filtre1 and not genre:
+	df_selection = df.query("(ANNEE_SCOLAIRE==@annees)")
+elif not Zones and not SS and not OD and not SOD and not classe and not filtre1 and not genre:
+	df_selection = df.query("(ANNEE_SCOLAIRE==@annees) and (REGIONS==@Régions)")
 
 st.dataframe(df_selection)
 
