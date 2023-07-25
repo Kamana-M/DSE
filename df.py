@@ -1,21 +1,27 @@
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+import openpyxl
 
 st.set_page_config(page_title="Education dashboard",page_icon="",layout="wide")
 
-df=pd.read_excel(
-io="Dashboard actuel.xlsx",
-engine='openpyxl',
-sheet_name='Elev_effec',
-skiprows=0,
-usecols='A:J',
-nrows=631,
-)
-
-st.dataframe(df)
+fl = st.file_uploader(":file_folder: Télécharger un fichier",type=(["csv","txt","xlsx","xls"]))
+if fl is not None:
+    filename = fl.name
+    st.write(filename)
+    df = pd.read_csv(filename, encoding = "ISO-8859-1")
+else:
+    df=pd.read_excel(
+	io="Dashboard actuel.xlsx",
+	engine='openpyxl',
+	sheet_name='Elev_effec',
+	skiprows=0,
+	usecols='A:J',
+	nrows=631,
+)	
 
 st.sidebar.header("Filtrer ici:")
+
 
 annees=st.sidebar.multiselect(
 	"Selectionner une région",
