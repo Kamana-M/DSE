@@ -22,10 +22,7 @@ else:
 	
 st.sidebar.header("Filtrer ici:")
 
-annees=st.sidebar.multiselect(
-	"Selectionner une région",
-	options=df["ANNEE_SCOLAIRE"].unique()
-	)
+annees=st.sidebar.multiselect("Selectionner une région",options=df["ANNEE_SCOLAIRE"].unique(),default=df["ANNEE_SCOLAIRE"].unique())
 
 Régions=st.sidebar.multiselect(
 	"Selectionner une région",
